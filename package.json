@@ -1,6 +1,7 @@
 {
   "name": "lambda-canary-deployments",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "license": "ISC",
   "bin": {
     "lambda-canary-deployments": "bin/lambda-canary-deployments.js"
   },
@@ -12,16 +13,29 @@
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.119.0",
-    "@types/jest": "^26.0.10",
+    "@types/jest": "^27.0.1",
     "@types/node": "10.17.27",
-    "jest": "^26.4.2",
-    "ts-jest": "^26.2.0",
     "aws-cdk": "1.119.0",
-    "ts-node": "^9.0.0",
-    "typescript": "~3.9.7"
+    "husky": "7.0.1",
+    "jest": "^27.0.6",
+    "lint-staged": "11.1.2",
+    "prettier": "2.3.2",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "~4.3.5"
   },
   "dependencies": {
+    "@aws-cdk/aws-apigateway": "1.119.0",
+    "@aws-cdk/aws-lambda-nodejs": "1.119.0",
+    "@aws-cdk/aws-logs": "1.119.0",
     "@aws-cdk/core": "1.119.0",
     "source-map-support": "^0.5.16"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "lint-staged": {
+    "*.{js,ts,json,md}": "prettier --write"
   }
 }
