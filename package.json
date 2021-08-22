@@ -13,9 +13,11 @@
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.119.0",
+    "@types/aws-lambda": "8.10.83",
     "@types/jest": "^27.0.1",
     "@types/node": "10.17.27",
     "aws-cdk": "1.119.0",
+    "esbuild": "0.12.22",
     "husky": "7.0.1",
     "jest": "^27.0.6",
     "lint-staged": "11.1.2",
@@ -26,9 +28,13 @@
   },
   "dependencies": {
     "@aws-cdk/aws-apigateway": "1.119.0",
+    "@aws-cdk/aws-cloudwatch": "1.119.0",
+    "@aws-cdk/aws-codedeploy": "1.119.0",
+    "@aws-cdk/aws-codepipeline-actions": "1.119.0",
     "@aws-cdk/aws-lambda-nodejs": "1.119.0",
     "@aws-cdk/aws-logs": "1.119.0",
     "@aws-cdk/core": "1.119.0",
+    "@aws-cdk/pipelines": "1.119.0",
     "source-map-support": "^0.5.16"
   },
   "prettier": {
