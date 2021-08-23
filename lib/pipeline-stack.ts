@@ -31,6 +31,7 @@ export class PipelineStack extends cdk.Stack {
         oauthToken: cdk.SecretValue.secretsManager('github-token'),
         owner: 'ryands17',
         repo: 'lambda-canary-deployments',
+        branch: 'main',
       }),
       synthAction: pipelines.SimpleSynthAction.standardYarnSynth({
         cloudAssemblyArtifact,
