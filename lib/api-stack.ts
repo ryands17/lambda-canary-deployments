@@ -30,6 +30,10 @@ export class ApiStack extends cdk.Stack {
         metricName: 'Errors',
         namespace: 'AWS/Lambda',
         statistic: 'sum',
+        // dimensionsMap: {
+        //   Resource: `${handler.functionArn}:stage`,
+        //   FunctionName: handler.functionArn,
+        // },
         period: cdk.Duration.minutes(1),
       }),
       threshold: 1,
