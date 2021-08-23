@@ -1,20 +1,8 @@
+import * as cdk from '@aws-cdk/core'
 import * as codepipeline from '@aws-cdk/aws-codepipeline'
 import * as codepipelineActions from '@aws-cdk/aws-codepipeline-actions'
-import * as cdk from '@aws-cdk/core'
 import * as pipelines from '@aws-cdk/pipelines'
-import { ApiStack } from './api-stack'
-
-class StagingStage extends cdk.Stage {
-  readonly apiURL: cdk.CfnOutput
-
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StageProps) {
-    super(scope, id, props)
-
-    const app = new ApiStack(this, 'ApiStackStaging')
-
-    this.apiURL = app.apiURL
-  }
-}
+import { StagingStage } from './stages'
 
 export class PipelineStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
