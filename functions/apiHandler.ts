@@ -4,7 +4,7 @@ export const handler: ProxyHandler = async (event) => {
   console.log('all method handler')
   return {
     body: JSON.stringify({
-      message: 'API version 2 has been deployed!',
+      message: 'API version 3 has been deployed!',
       path: event.path,
     }),
     headers: { 'Content-Type': 'application/json' },
