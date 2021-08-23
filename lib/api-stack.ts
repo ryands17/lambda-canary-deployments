@@ -33,8 +33,8 @@ export class ApiStack extends cdk.Stack {
         namespace: 'AWS/Lambda',
         statistic: 'sum',
         dimensionsMap: {
-          Resource: `${handler.functionArn}:${aliasName}`,
-          FunctionName: handler.functionArn,
+          Resource: `${handler.functionName}:${aliasName}`,
+          FunctionName: handler.functionName,
         },
         period: cdk.Duration.minutes(1),
       }),
