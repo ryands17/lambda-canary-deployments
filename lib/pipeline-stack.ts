@@ -4,13 +4,13 @@ import * as cdk from '@aws-cdk/core'
 import * as pipelines from '@aws-cdk/pipelines'
 import { ApiStack } from './api-stack'
 
-class PipelineStagingStage extends cdk.Stage {
+class StagingStage extends cdk.Stage {
   readonly apiURL: cdk.CfnOutput
 
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StageProps) {
     super(scope, id, props)
 
-    const app = new ApiStack(this, 'LambdaApp')
+    const app = new ApiStack(this, 'ApiStackStaging')
 
     this.apiURL = app.apiURL
   }
@@ -39,19 +39,20 @@ export class PipelineStack extends cdk.Stack {
       }),
     })
 
-    const stagingStage = new PipelineStagingStage(this, 'staging', {
+    const stagingStage = new StagingStage(this, 'staging', {
       env: { region: process.env.region || 'us-east-2' },
     })
-    const staging = pipeline.addApplicationStage(stagingStage)
+    // const staging = pipeline.addApplicationStage(stagingStage)
+    pipeline.addApplicationStage(stagingStage)
 
-    staging.addActions(
-      new pipelines.ShellScriptAction({
-        actionName: 'testURL',
-        useOutputs: {
-          API_URL: pipeline.stackOutput(stagingStage.apiURL),
-        },
-        commands: ['curl -Ssf $API_URL'],
-      })
-    )
+    // staging.addActions(
+    //   new pipelines.ShellScriptAction({
+    //     actionName: 'testURL',
+    //     useOutputs: {
+    //       API_URL: pipeline.stackOutput(stagingStage.apiURL),
+    //     },
+    //     commands: ['curl -Ssf $API_URL'],
+    //   })
+    // )
   }
 }
