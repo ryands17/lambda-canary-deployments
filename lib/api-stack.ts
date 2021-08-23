@@ -13,14 +13,14 @@ export class ApiStack extends cdk.Stack {
 
     // Function and its alias
     const handler = new Lambda(this, 'apiHandler')
-    const dev = new lambda.Alias(this, 'apiHandlerDev', {
-      aliasName: 'dev',
+    const stage = new lambda.Alias(this, 'apiHandlerDev', {
+      aliasName: 'stage',
       version: handler.currentVersion,
     })
 
     // API endpoint
     const api = new apiGw.LambdaRestApi(this, 'restApi', {
-      handler: dev,
+      handler: stage,
       deployOptions: { stageName: 'dev' },
     })
 
@@ -31,17 +31,13 @@ export class ApiStack extends cdk.Stack {
         namespace: 'AWS/Lambda',
         statistic: 'sum',
         period: cdk.Duration.minutes(1),
-        dimensionsMap: {
-          Resource: dev.functionArn,
-          FunctionName: handler.functionArn,
-        },
       }),
       threshold: 1,
       evaluationPeriods: 1,
     })
 
     new cd.LambdaDeploymentGroup(this, 'canaryDeployment', {
-      alias: dev,
+      alias: stage,
       deploymentConfig: cd.LambdaDeploymentConfig.CANARY_10PERCENT_5MINUTES,
       alarms: [failureAlarm],
     })
