@@ -11,7 +11,7 @@ export class PipelineStack extends cdk.Stack {
     const sourceArtifact = new codepipeline.Artifact()
     const cloudAssemblyArtifact = new codepipeline.Artifact()
 
-    const pipeline = new pipelines.CdkPipeline(this, 'deployApp', {
+    const pipeline = new pipelines.CdkPipeline(this, 'deployApi', {
       cloudAssemblyArtifact,
       sourceAction: new codepipelineActions.GitHubSourceAction({
         actionName: 'GH',
@@ -30,17 +30,6 @@ export class PipelineStack extends cdk.Stack {
     const stagingStage = new StagingStage(this, 'staging', {
       env: { region: process.env.region || 'us-east-2' },
     })
-    // const staging = pipeline.addApplicationStage(stagingStage)
     pipeline.addApplicationStage(stagingStage)
-
-    // staging.addActions(
-    //   new pipelines.ShellScriptAction({
-    //     actionName: 'testURL',
-    //     useOutputs: {
-    //       API_URL: pipeline.stackOutput(stagingStage.apiURL),
-    //     },
-    //     commands: ['curl -Ssf $API_URL'],
-    //   })
-    // )
   }
 }

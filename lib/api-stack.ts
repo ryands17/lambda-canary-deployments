@@ -15,7 +15,7 @@ export class ApiStack extends cdk.Stack {
 
     // Function and its alias
     const handler = new Lambda(this, 'apiHandler')
-    const stage = new lambda.Alias(this, 'apiHandlerDev', {
+    const stage = new lambda.Alias(this, 'apiHandlerStage', {
       aliasName,
       version: handler.currentVersion,
     })
@@ -23,7 +23,7 @@ export class ApiStack extends cdk.Stack {
     // API endpoint
     const api = new apiGw.LambdaRestApi(this, 'restApi', {
       handler: stage,
-      deployOptions: { stageName: 'dev' },
+      deployOptions: { stageName: 'staging' },
     })
 
     const failureAlarm = new cw.Alarm(this, 'lambdaFailure', {
