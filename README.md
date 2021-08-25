@@ -2,6 +2,8 @@
 
 An example project using API Gateway and Lambda with weighted routing to the latest function deployed. This will send a small portion of traffic to the new version and rollback if errors occur using CloudWatch Alarms.
 
+Blog Post: [https://dev.to/ryands17/canary-deployment-of-lambdas-using-cdk-pipelines-1l0b](https://dev.to/ryands17/canary-deployment-of-lambdas-using-cdk-pipelines-1l0b)
+
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 ## Useful commands
